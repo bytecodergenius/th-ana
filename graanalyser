@@ -1,0 +1,103 @@
+def keywords(v): 
+    keywoord=[]
+    keyword=["char","float","input","double","debut","fin","int","const","string","bool","for","else","if","elif","import","pass","None","break","False","True","except","in","while","class","return","continue","from","del","with","try","assert","async","as"]
+    for i in range(0,len(keyword)):
+        while(v.count(keyword[i])>0):
+            k=v.find(keyword[i])
+            keywoord.append(keyword[i])
+            v=v.replace(keyword[i],' ')
+        i=i+1
+    return v,keywoord
+
+def operators(v): 
+    g_operator=["**=","<<=",">>=","*=","//=","/=","//","**","-=","+=","+","-","==","!=","=","and","or","is not","is","not in","not","&=","^=","|=","&","|","*","%","/","<=",">=",">","<"]
+    operatorr=[]
+    for i in range(0,len(g_operator)):
+        while(v.count(g_operator[i])>0):
+            k=v.find(g_operator[i])
+            operatorr.append(g_operator[i])
+            v=v.replace(g_operator[i],'')
+        i=i+1
+    return v,operatorr
+
+
+with open('grammaire.txt', 'r') as file:
+    v = file.read().split()
+    v="".join(v)
+
+    
+
+g_separator=[",",";",":","{","[","(",")","]","}","||"]
+operator=[]
+separator=[]
+digit=[]
+Vt=[]
+Vn=[]
+keyword=[]
+identificator=[]
+if(v.count("-->")>0):
+    identificator.append("-->")
+    v=v.replace("-->","")
+v,operator=operators(v)
+v,keyword=keywords(v)    
+for i in range(len(v)):
+    if v[i] in g_separator:
+        separator.append(v[i])
+    elif v[i].isdigit():
+        digit.append(v[i])
+    elif v[i].isalpha() and v[i].isupper():
+        Vn.append(v[i])
+    elif v[i].isalpha() and v[i].islower():
+        Vt.append(v[i])
+    
+          
+operator = list(dict.fromkeys(operator))   
+separator= list(dict.fromkeys(separator))
+digit= list(dict.fromkeys(digit))
+Vt= list(dict.fromkeys(Vt))
+Vn= list(dict.fromkeys(Vn))  
+identificator= list(dict.fromkeys(identificator))   
+
+    
+if len(operator)!=0:
+        print("\n\n operators:")
+        print("-------------------------------")
+        for i in operator:
+            print(" | "+i,end='')
+            
+if len(separator)!=0:
+        print("\n\n separators:")
+        print("-------------------------------")
+        for i in separator:
+            print(" | "+i,end='')
+            
+if len(Vt)!=0:
+        print("\n\n Vt:")
+        print("-------------------------------")
+        for i in Vt:
+            print(" | "+i,end='')
+            
+if len(Vn)!=0:
+        print("\n\n Vn:")
+        print("---------------------------------")
+        for i in Vn:
+            print(" | "+i,end='')
+            
+if len(digit)!=0:
+        print("\n\n digits:")
+        print("--------------------------------")
+        for i in digit:
+            print(" | "+i,end='')
+
+            
+if len(keyword)!=0:
+        print("\n\n keywords:")
+        print("--------------------------------")
+        for i in keyword:
+            print(" | "+i,end='')
+
+if len(identificator)!=0:
+         print("\n\n identificator:")
+         print("---------------------------------")
+         print(" | "+"-->")   
+
