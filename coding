@@ -1,0 +1,109 @@
+def printf(v):
+    string=[]
+    while(v.count("print")>0):
+        p=v.index("print")
+        k=v.find(");")
+        string.append(v[p+7:k-1])
+        i=v[p:k+1]
+        v=v.replace(i,' ')
+        return v,string
+def keywords(v): 
+    keywoord=[]
+    keyword=["char ","float ","input ","double ","int ","const ","string ","bool ","for ","else ","if ","elif ","import ","pass ","None ","break ","False ","True ","except ","in ","while ","True ","class ","return ","continue ","from ","del ","with ","try ","assert ","async ","as "]
+    for i in range(0,len(keyword)):
+        while(v.count(keyword[i])>0):
+            k=v.find(keyword[i])
+            keywoord.append(keyword[i])
+            v=v.replace(keyword[i],' ')
+        i=i+1
+    return v,keywoord
+def operators(v): 
+    g_operator=["**=","<<=",">>=","*=","/=","//=","//","**","-=","+=","+","-","==","!=","=","and","or","not","is","is not","not in","&=","^=","|=","&","|","*","%","/","<=",">=",">","<"]
+    operatorr=[]
+    for i in range(0,len(g_operator)):
+        while(v.count(g_operator[i])>0):
+            k=v.find(g_operator[i])
+            operatorr.append(g_operator[i])
+            v=v.replace(g_operator[i],'')
+        i=i+1
+    return v,operatorr
+def separators(v): 
+    g_separator=[";",":",",",".","[","(","{",")","]","}"]
+    separatorr=[]
+    for i in range(0,len(g_separator)):
+        while(v.count(g_separator[i])>0):
+            k=v.find(g_separator[i])
+            separatorr.append(g_separator[i])
+            v=v.replace(g_separator[i],' ')
+        i=i+1
+    return v,separatorr
+
+    
+with open('grammaire.txt', 'r') as file:
+    s= file.read()
+
+g_separator=[",",";",":","{","[","(",")","]","}","||"]
+operator=[]
+separator=[]
+digit=[]
+string=[]
+keywoord=[]
+v,string=printf(s)
+v,keywoord=keywords(v)
+v,operator=operators(v)
+v,separator=separators(v)
+for i in range(len(v)):
+    if v[i].isdigit():
+        digit.append(v[i])
+        v=v.replace(v[i]," ")
+identificateur=v.split()
+    
+if len(string)!=0:
+    keywoord.append("print")
+    
+          
+operator = list(dict.fromkeys(operator))   
+separator= list(dict.fromkeys(separator))
+digit= list(dict.fromkeys(digit))
+keywoord= list(dict.fromkeys(keywoord))
+if len(operator)!=0:
+        print("\n\n operators:")
+        print("-------------------------------")
+        for i in operator:
+            print(" | "+i,end='')
+            
+if len(separator)!=0:
+        print("\n\n separators:")
+        print("-------------------------------")
+        for i in separator:
+            print(" | "+i,end='')
+if len(string)!=0:
+        print("\n\n strings:")
+        print("-------------------------------")
+        for i in string:
+            print(" | "+i,end='')
+            
+if len(keywoord)!=0:
+        print("\n\n keywoord:")
+        print("-------------------------------")
+        for i in keywoord:
+            print(" | "+i,end='')
+
+if len(digit)!=0:
+        print("\n\n digits:")
+        print("--------------------------------")
+        for i in digit:
+            print(" | "+i,end='')
+if len(identificateur)!=0:
+        print("\n\n identifiers:")
+        print("--------------------------------")
+        for i in identificateur:
+            print(" | "+i,end='')
+            
+print(v)
+#lif printf n3adouha string
+#printf et tt ga3 des names
+#ndiro les identificateur w nkamlo les motes clé.....
+#nzido blk ykoun kayan des package w return......
+#horof 3arbia 
+
