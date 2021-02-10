@@ -100,10 +100,5 @@ if len(identificateur)!=0:
         for i in identificateur:
             print(" | "+i,end='')
             
-print(v)
-#lif printf n3adouha string
-#printf et tt ga3 des names
-#ndiro les identificateur w nkamlo les motes clé.....
-#nzido blk ykoun kayan des package w return......
-#horof 3arbia 
+
 
